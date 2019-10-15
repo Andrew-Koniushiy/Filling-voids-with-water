@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="DrawingArea">
+        <attr name="blockColor" format="color|reference" />
+        <attr name="blockBorderColor" format="color|reference" />
+        <attr name="waterColor" format="color|reference" />
+        <attr name="maxX" format="integer" />
+        <attr name="maxY" format="integer" />
+        <attr name="unitStep" format="dimension" />
+    </declare-styleable>
+</resources>

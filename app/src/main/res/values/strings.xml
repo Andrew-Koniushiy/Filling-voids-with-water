@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Filling voids with water</string>
+    <string name="x_max">Xmax</string>
+    <string name="y_max">Ymax</string>
+</resources>
