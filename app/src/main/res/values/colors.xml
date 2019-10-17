@@ -3,4 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="waterColor">#33b5e5</color>
+    <color name="mountainColor">#FFB300</color>
 </resources>

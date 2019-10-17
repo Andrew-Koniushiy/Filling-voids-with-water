@@ -13,6 +13,7 @@ import android.view.View;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DrawingArea extends View {
@@ -23,13 +24,6 @@ public class DrawingArea extends View {
     private Paint pGrid;
     private Paint pWater;
     
-    @ColorInt
-    private int blockColor;
-    @ColorInt
-    private int blockBorderColor;
-    @ColorInt
-    private int waterColor;
-    
     private int xMax;
     private int yMax;
     private Rect drawRect;
@@ -39,8 +33,8 @@ public class DrawingArea extends View {
     private int paddingRight;
     private int unitStepX;
     private int unitStepY;
-    private List<List<Block>> blocks;
-    private List<Block> waterBlocks;
+    private List<List<Block>> blocks = new ArrayList<>();
+    private List<Block> waterBlocks = new ArrayList<>();
     
     
     public DrawingArea(Context context) {
@@ -62,9 +56,9 @@ public class DrawingArea extends View {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.DrawingArea, defStyle, 0);
-        blockColor = a.getColor(R.styleable.DrawingArea_blockColor, Color.YELLOW);
-        blockBorderColor = a.getColor(R.styleable.DrawingArea_blockBorderColor, Color.YELLOW);
-        waterColor = a.getColor(R.styleable.DrawingArea_waterColor, Color.BLUE);
+        int blockColor = a.getColor(R.styleable.DrawingArea_blockColor, Color.YELLOW);
+        int blockBorderColor = a.getColor(R.styleable.DrawingArea_blockBorderColor, Color.RED);
+        int waterColor = a.getColor(R.styleable.DrawingArea_waterColor, Color.BLUE);
         
         xMax = a.getInt(R.styleable.DrawingArea_maxX, 0);
         yMax = a.getInt(R.styleable.DrawingArea_maxY, 0);
@@ -144,14 +138,16 @@ public class DrawingArea extends View {
         canvas.translate(paddingLeft, paddingTop);
         canvas.scale(1, -1, drawRect.width() / 2, drawRect.height() / 2);
         drawGrid(canvas);
-        
-        for (List<Block> innerBlocks : blocks) {
-            for (Block block : innerBlocks) {
-                block.draw(canvas, unitStepX, unitStepY, pBlock, pBlockBorder);
+    
+        if (!isInEditMode()) {
+            for (List<Block> innerBlocks : blocks) {
+                for (Block block : innerBlocks) {
+                    block.draw(canvas, unitStepX, unitStepY, pBlock, pBlockBorder);
+                }
             }
-        }
-        for (Block block : waterBlocks) {
-            block.draw(canvas, unitStepX, unitStepY, pWater, pBlockBorder);
+            for (Block block : waterBlocks) {
+                block.draw(canvas, unitStepX, unitStepY, pWater, pBlockBorder);
+            }
         }
     }
     

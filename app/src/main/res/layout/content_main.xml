@@ -5,6 +5,10 @@
 
     <data>
 
+        <import
+            alias="utils"
+            type="com.example.fillingvoidswithwater.CommonUtils" />
+
         <variable
             name="data"
             type="com.example.fillingvoidswithwater.DataViewModel" />
@@ -23,16 +27,16 @@
             android:layout_height="0dp"
             android:background="#ECEDED"
             app:blockBorderColor="#3949AB"
-            app:blockColor="#FFB300"
+            app:blockColor="@color/mountainColor"
             app:blocks="@{data.blocks}"
-            app:waterBlocks="@{data.waterBlocks}"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:maxX="@{data.xMax}"
             app:maxY="@{data.yMax}"
-            app:waterColor="#33b5e5"
+            app:waterBlocks="@{data.waterBlocks}"
+            app:waterColor="@color/waterColor"
             tools:maxX="4"
             tools:maxY="4" />
 
@@ -77,5 +81,43 @@
                 android:inputType="number"
                 android:text="@={data.yMax}" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/mountain_color"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/mountainColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yMax" />
+
+        <View
+            android:id="@+id/water_color"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/waterColor"
+            app:layout_constraintStart_toStartOf="@+id/mountain_color"
+            app:layout_constraintTop_toBottomOf="@+id/mountain_color" />
+
+        <TextView
+            android:id="@+id/block_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{`Mountain block count is `+utils.getBlockCount(data.blocks)}"
+            app:layout_constraintBottom_toBottomOf="@+id/mountain_color"
+            app:layout_constraintStart_toEndOf="@+id/mountain_color" />
+
+        <TextView
+            android:id="@+id/water_block_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{`Water block count is `+data.waterBlocks.size()}"
+            app:layout_constraintBottom_toBottomOf="@+id/water_color"
+            app:layout_constraintStart_toEndOf="@+id/mountain_color" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
