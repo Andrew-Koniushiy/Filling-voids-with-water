@@ -38,6 +38,17 @@ public class BindingAdapters {
         drawingArea.setBlocks(lists);
     }
     
+    @SuppressWarnings("UseBulkOperation")
+    @SuppressLint("CheckResult")
+    @BindingAdapter("app:waterBlocks")
+    public static void setWaterBlocks(@NonNull DrawingArea drawingArea, @NonNull ObservableArrayList<Block> value) {
+        List<Block> list = new ArrayList<>();
+        for (Block block : value) {
+            list.add(block);
+        }
+        drawingArea.setWaterBlocks(list);
+    }
+    
     @SuppressLint("CheckResult")
     @BindingAdapter("android:text")
     public static void setTextString(@NonNull TextInputEditText view, int value) {

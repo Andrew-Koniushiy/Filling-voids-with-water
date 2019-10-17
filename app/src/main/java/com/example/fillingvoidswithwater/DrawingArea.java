@@ -40,6 +40,7 @@ public class DrawingArea extends View {
     private int unitStepX;
     private int unitStepY;
     private List<List<Block>> blocks;
+    private List<Block> waterBlocks;
     
     
     public DrawingArea(Context context) {
@@ -98,6 +99,11 @@ public class DrawingArea extends View {
         refresh();
     }
     
+    public void setWaterBlocks(List<Block> blocks) {
+        this.waterBlocks = blocks;
+        refresh();
+    }
+    
     public void setXMax(int xMax) {
         this.xMax = xMax;
         refresh();
@@ -144,7 +150,9 @@ public class DrawingArea extends View {
                 block.draw(canvas, unitStepX, unitStepY, pBlock, pBlockBorder);
             }
         }
-        
+        for (Block block : waterBlocks) {
+            block.draw(canvas, unitStepX, unitStepY, pWater, pBlockBorder);
+        }
     }
     
     private void drawGrid(Canvas canvas) {

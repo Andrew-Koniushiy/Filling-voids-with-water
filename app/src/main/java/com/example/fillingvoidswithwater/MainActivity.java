@@ -14,12 +14,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        
         ViewModelProvider provider = new ViewModelProvider(this);
         DataViewModel viewModel = provider.get(DataViewModel.class);
         binding.content.setData(viewModel);
         setSupportActionBar(binding.toolbar);
-        binding.fab.setOnClickListener(view -> provider.get(DataViewModel.class).generateBlocks());
+        binding.fab.setOnClickListener(view -> {
+            viewModel.generateBlocks();
+            view.postDelayed(viewModel::generateWaterBlocks, 300);
+        });
     }
     
 }

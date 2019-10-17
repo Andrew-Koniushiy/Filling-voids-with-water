@@ -6,21 +6,38 @@ import android.graphics.Rect;
 
 import androidx.annotation.NonNull;
 
+@SuppressWarnings("unused")
 public class Block {
-    private int x0;
-    private int y0;
-    private int x1;
-    private int y1;
+    private int xMin;
+    private int yMin;
+    private int xMax;
+    private int yMax;
     
-    Block(int x0, int y0, int x1, int y1) {
-        this.x0 = x0;
-        this.y0 = y0;
-        this.x1 = x1;
-        this.y1 = y1;
+    Block(int xMin, int yMin, int xMax, int yMax) {
+        this.xMin = xMin;
+        this.yMin = yMin;
+        this.xMax = xMax;
+        this.yMax = yMax;
+    }
+    
+    int getXMin() {
+        return xMin;
+    }
+    
+    int getYMin() {
+        return yMin;
+    }
+    
+    int getXMax() {
+        return xMax;
+    }
+    
+    int getYMax() {
+        return yMax;
     }
     
     void draw(@NonNull Canvas canvas, int unitStepX, int unitStepY, Paint paint, Paint borderPaint) {
-        Rect rect = new Rect(x0 * unitStepX, y0 * unitStepY, x1 * unitStepX, y1 * unitStepY);
+        Rect rect = new Rect(xMin * unitStepX, yMin * unitStepY, xMax * unitStepX, yMax * unitStepY);
         canvas.drawRect(rect, paint);
         canvas.drawRect(rect, borderPaint);
     }
